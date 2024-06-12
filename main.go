@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -20,10 +21,24 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getMegaplexShowtimes(theaterId string) []Showtime {
-	const url = "https://apiv2.megaplextheatres.com/api/film/cinemaFilms" + theaterId
-	showtimes, err := http.Get(url)
+	url := "https://apiv2.megaplextheatres.com/api/film/cinemaFilms/" + theaterId
+	res, httpErr := http.Get(url)
+	if httpErr != nil {
+		log.Fatal(httpErr, "Failed to get showtimes from Megaplex")
+	}
+	defer res.Body.Close()
+	var showTimes TheaterSessions
+	decodeErr := json.NewDecoder(res.Body).Decode(&showTimes)
+	fmt.Println(res.Status, "Status")
+	if decodeErr != nil {
+		log.Fatal(decodeErr, "Failed to decode showtimes from Megaplex")
+	}
 
-	return showTimes
+	for _, showTime := range showTimes {
+		fmt.Println(showTime.Title)
+	}
+
+	return make([]Showtime, 0)
 }
 
 func main() {
