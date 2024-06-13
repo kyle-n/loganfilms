@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -23,9 +24,17 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
+	ch := make(chan []Screening, len(theaters))
+	var wg sync.WaitGroup
 	for i := range theaters {
-		theaters[i].Screenings = getMegaplexScreenings(theaters[i].Id)
+		wg.Add(1)
+		go func(i int) {
+			getMegaplexScreenings(theaters[i].Id, ch)
+			theaters[i].Screenings = <-ch
+			wg.Done()
+		}(i)
 	}
+	wg.Wait()
 
 	homePageData := HomePageData{
 		Theaters: theaters,
@@ -35,7 +44,7 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	_ = template.Execute(w, homePageData)
 }
 
-func getMegaplexScreenings(theaterId string) []Screening {
+func getMegaplexScreenings(theaterId string, ch chan []Screening) {
 	url := "https://apiv2.megaplextheatres.com/api/film/cinemaFilms/" + theaterId
 	res, httpErr := http.Get(url)
 	if httpErr != nil {
@@ -44,7 +53,6 @@ func getMegaplexScreenings(theaterId string) []Screening {
 	defer res.Body.Close()
 	var megaplexTheaterSessions TheaterSessions
 	decodeErr := json.NewDecoder(res.Body).Decode(&megaplexTheaterSessions)
-	fmt.Println(res.Status, "Status")
 	if decodeErr != nil {
 		log.Fatal(decodeErr, "Failed to decode showtimes from Megaplex")
 	}
@@ -59,7 +67,7 @@ func getMegaplexScreenings(theaterId string) []Screening {
 		screenings = append(screenings, showTime)
 	}
 
-	return screenings
+	ch <- screenings
 }
 
 func main() {
