@@ -36,6 +36,7 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 		}(i)
 	}
 	wg.Wait()
+	searchForMovieTmdbId("Halloween")
 
 	homePageData := HomePageData{
 		Theaters: theaters,
