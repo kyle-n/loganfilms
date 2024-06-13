@@ -9,17 +9,15 @@ import (
 	"html/template"
 )
 
-type Showtime struct {
-	Title     string
-	ShowTimes []time.Time
-	TMDBID    int
-}
-
 func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	// getMegaplexShowtimes("https://www.megaplextheatres.com/university")
-	getMegaplexShowtimes("0008")
+	universityShowTimes := getMegaplexShowtimes("0008")
+	homePageData := HomePageData{
+		Showtimes: universityShowTimes,
+		Today: time.Now(),
+	}
 	template, _ := template.ParseFiles("home.html")
-	_ = template.Execute(w, nil)
+	_ = template.Execute(w, homePageData)
 }
 
 func getMegaplexShowtimes(theaterId string) []Showtime {
