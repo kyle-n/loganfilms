@@ -10,18 +10,26 @@
   <body>
     <h1>Logan Movie Times</h1>
     <p>Today's date and time: {{ .Today.Format "January 2, 2006 - 3:04pm" }}</p>
-    {{ range $theater := .Theaters }}
+    <main>
+      {{ range $theater := .Theaters }}
       <section>
         <h2>{{ $theater.Name }}</h2>
         {{ range $movie := $theater.Screenings }}
-          <h3>{{ $movie.Title }}</h3>
-          <ul>
-            {{ range $showtime := $movie.ShowTimes }}
-              <li>{{ $showtime.Format "January 2, 3:04pm" }}</li>
-            {{ end }}
-          </ul>
+        <h3>{{ $movie.Title }}</h3>
+        <ul>
+          {{ range $showtime := $movie.ShowTimes }}
+          <li>{{ $showtime.Format "January 2, 3:04pm" }}</li>
+          {{ end }}
+        </ul>
         {{ end }}
       </section>
-    {{ end }}
+      {{ end }}
+    </main>
   </body>
+  <style>
+    main {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
 </html>

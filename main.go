@@ -14,13 +14,13 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	theaters := []Theater{
 		{
 			Screenings: make([]Screening, 0),
-			Id:         "0008",
-			Name:       "Megaplex University",
+			Id:         "0010",
+			Name:       "Megaplex Providence",
 		},
 		{
 			Screenings: make([]Screening, 0),
-			Id:         "0010",
-			Name:       "Megaplex Providence",
+			Id:         "0008",
+			Name:       "Megaplex University",
 		},
 	}
 
