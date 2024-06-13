@@ -18,5 +18,5 @@ type Theater struct {
 
 type HomePageData struct {
 	Theaters []Theater
-	Today             time.Time
+	Today    time.Time
 }

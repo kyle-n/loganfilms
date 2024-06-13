@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	. "loganfilms/types"
 	"net/http"
 	"strconv"
 	"time"
-	. "loganfilms/types"
 )
 
 func searchForMovieTmdbId(title string) int {
