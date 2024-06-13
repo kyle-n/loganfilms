@@ -23,7 +23,9 @@
         <h3>{{ $movie.Title }}</h3>
         <ul>
           {{ range $showtime := $movie.ShowTimes }}
-          <li>{{ $showtime.Format "Monday, January 2, 3:04pm" }}</li>
+          <li data-og-date="{{ $showtime }}">
+            {{ $showtime.Format "Monday, January 2, 3:04pm" }}
+          </li>
           {{ end }}
         </ul>
         {{ end }}
@@ -36,5 +38,25 @@
       display: flex;
       justify-content: space-between;
     }
+    .today {
+      background-color: crimson;
+      font-weight: bold;
+    }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const listItems = document.querySelectorAll("li");
+      const today = new Date();
+      listItems.forEach((item) => {
+        const date = new Date(item.getAttribute("data-og-date").trim());
+        if (
+          date.getFullYear() === today.getFullYear() &&
+          date.getMonth() === today.getMonth() &&
+          date.getDate() === today.getDate()
+        ) {
+          item.classList.add("today");
+        }
+      });
+    });
+  </script>
 </html>
