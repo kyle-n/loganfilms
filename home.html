@@ -9,7 +9,7 @@
   </head>
   <body>
     <h1>Logan Movie Times</h1>
-    <p>Today's date: {{ .Today }}</p>
+    <p>Today's date and time: {{ .Today.Format "January 2, 2006 - 3:04pm" }}</p>
     {{ range $theater := .Theaters }}
       <section>
         <h2>{{ $theater.Name }}</h2>
@@ -17,7 +17,7 @@
           <h3>{{ $movie.Title }}</h3>
           <ul>
             {{ range $showtime := $movie.ShowTimes }}
-              <li>{{ $showtime }}</li>
+              <li>{{ $showtime.Format "January 2, 3:04pm" }}</li>
             {{ end }}
           </ul>
         {{ end }}
