@@ -4,13 +4,13 @@ import (
 	"time"
 )
 
-type Showtime struct {
+type Screening struct {
 	Title     string
 	ShowTimes []time.Time
-	TMDBID    int
+	TmdbId    int
 }
 
 type HomePageData struct {
-	Showtimes []Showtime
-	Today		 time.Time
+	Screenings []Screening
+	Today     time.Time
 }

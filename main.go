@@ -3,24 +3,23 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"time"
-	"html/template"
 )
 
 func homepageHandler(w http.ResponseWriter, r *http.Request) {
-	// getMegaplexShowtimes("https://www.megaplextheatres.com/university")
-	universityShowTimes := getMegaplexShowtimes("0008")
+	universityScreenings := getMegaplexScreenings("0008")
 	homePageData := HomePageData{
-		Showtimes: universityShowTimes,
-		Today: time.Now(),
+		Screenings: universityScreenings,
+		Today:     time.Now(),
 	}
 	template, _ := template.ParseFiles("home.html")
 	_ = template.Execute(w, homePageData)
 }
 
-func getMegaplexShowtimes(theaterId string) []Showtime {
+func getMegaplexScreenings(theaterId string) []Screening {
 	url := "https://apiv2.megaplextheatres.com/api/film/cinemaFilms/" + theaterId
 	res, httpErr := http.Get(url)
 	if httpErr != nil {
@@ -34,18 +33,18 @@ func getMegaplexShowtimes(theaterId string) []Showtime {
 		log.Fatal(decodeErr, "Failed to decode showtimes from Megaplex")
 	}
 
-	showTimes := make([]Showtime, 0)
+	screenings := make([]Screening, 0)
 	for _, session := range megaplexTheaterSessions {
-		showTime := Showtime{
+		showTime := Screening{
 			Title:     session.Title,
 			ShowTimes: make([]time.Time, 0),
-			TMDBID:    0,
+			TmdbId:    0,
 		}
-		showTimes = append(showTimes, showTime)
+		screenings = append(screenings, showTime)
 	}
-	fmt.Println(showTimes)
+	fmt.Println(screenings)
 
-	return showTimes
+	return screenings
 }
 
 func main() {

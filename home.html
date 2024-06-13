@@ -8,7 +8,12 @@
     />
   </head>
   <body>
-  <h1>Logan Movie Times</h1>
-  <p>Today's date: {{ .Today }}</p>
+    <h1>Logan Movie Times</h1>
+    <p>Today's date: {{ .Today }}</p>
+    <ul>
+      {{ range $screening := .Screenings }}
+      <li>{{ $screening.Title }}</li>
+      {{ end }}
+    </ul>
   </body>
 </html>
