@@ -16,11 +16,13 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 			Screenings: make([]Screening, 0),
 			Id:         "0010",
 			Name:       "Megaplex Providence",
+			Url:        "https://www.megaplextheatres.com/providence",
 		},
 		{
 			Screenings: make([]Screening, 0),
 			Id:         "0008",
 			Name:       "Megaplex University",
+			Url:        "https://www.megaplextheatres.com/university",
 		},
 	}
 

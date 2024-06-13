@@ -13,7 +13,9 @@
     <main>
       {{ range $theater := .Theaters }}
       <section>
-        <h2>{{ $theater.Name }}</h2>
+        <h2>
+          <a href="{{ $theater.Url }}" target="_blank"> {{ $theater.Name }} </a>
+        </h2>
         {{ range $movie := $theater.Screenings }}
         <h3>{{ $movie.Title }}</h3>
         <ul>

@@ -15,6 +15,7 @@ type Theater struct {
 	Screenings []Screening
 	Id         string
 	Name       string
+	Url        string
 }
 
 type HomePageData struct {
