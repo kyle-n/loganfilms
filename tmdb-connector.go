@@ -1,8 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
+	"time"
+	. "loganfilms/types"
 )
 
 func searchForMovieTmdbId(title string) int {
@@ -16,10 +20,13 @@ func searchForMovieTmdbId(title string) int {
 	req.Header.Set("Authorization", "Bearer "+tmdbApiKey)
 	req.Header.Set("accept", "application/json")
 
+	currentYear := time.Now().Year()
+
 	q := req.URL.Query()
 	q.Add("query", title)
 	q.Add("include_adult", "false")
 	q.Add("language", "en-US")
+	q.Add("primary_release_year", strconv.Itoa(currentYear))
 	req.URL.RawQuery = q.Encode()
 
 	res, httpErr := http.DefaultClient.Do(req)
@@ -28,6 +35,12 @@ func searchForMovieTmdbId(title string) int {
 	}
 	defer res.Body.Close()
 	fmt.Println(res.StatusCode, "tmdb status")
+
+	var tmdbSearchResults TmdbSearchResponse
+	decodeErr := json.NewDecoder(res.Body).Decode(&tmdbSearchResults)
+	if decodeErr != nil {
+		return noId
+	}
 
 	return noId
 }
