@@ -28,14 +28,14 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	for i := range theaters {
 		wg.Add(1)
 		go func(i int) {
-			sessions := getMegaplexTheaterSessions(theaters[i].Id)
+			scheduledMovies := getMegaplexTheaterScheduledMovies(theaters[i].Id)
 			screenings := make([]Screening, 0)
-			for _, session := range sessions {
+			for _, scheduledMovie := range scheduledMovies {
 				showTime := Screening{
-					Title:     session.Title,
-					ShowTimes: getShowTimesFromMegaplexSession(session),
-					TmdbId:    0,
-					ReleaseDate: time.Time(session.NationalOpeningDate),
+					Title:       scheduledMovie.Title,
+					ShowTimes:   getShowTimesFromMegaplexSession(scheduledMovie),
+					TmdbId:      0,
+					ReleaseDate: time.Time(scheduledMovie.NationalOpeningDate),
 				}
 				screenings = append(screenings, showTime)
 			}

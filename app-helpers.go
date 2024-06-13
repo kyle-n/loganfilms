@@ -16,7 +16,7 @@ func sortScreeningsByReleaseDate(screenings *[]Screening) {
 	})
 }
 
-func getShowTimesFromMegaplexSession(movie TheaterSession) []time.Time {
+func getShowTimesFromMegaplexSession(movie MegaplexScheduledMovie) []time.Time {
 	showTimes := make([]time.Time, 0)
 	for _, session := range movie.Sessions {
 		showTimes = append(showTimes, time.Time(session.Showtime))

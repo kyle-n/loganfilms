@@ -2,7 +2,7 @@ package types
 
 import "time"
 
-type TheaterSessions []TheaterSession
+type MegaplexScheduledMovies []MegaplexScheduledMovie
 
 type MegaplexTime time.Time
 
@@ -15,113 +15,113 @@ func (t *MegaplexTime) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-type TheaterSession struct {
-	ID                                   string        `json:"id"`
-	ScheduledFilmID                      string        `json:"scheduledFilmId"`
-	CinemaID                             string        `json:"cinemaId"`
-	Sessions                             []Session     `json:"sessions"`
-	SessionCount                         int64         `json:"sessionCount"`
-	FirstDaysSessions                    interface{}   `json:"firstDaysSessions"`
-	FutureSessions                       interface{}   `json:"futureSessions"`
-	HasFutureSessions                    bool          `json:"hasFutureSessions"`
-	Title                                string        `json:"title"`
-	TitleAlt                             string        `json:"titleAlt"`
-	Distributor                          string        `json:"distributor"`
-	Rating                               string        `json:"rating"`
-	RatingAlt                            string        `json:"ratingAlt"`
-	RatingDescription                    string        `json:"ratingDescription"`
-	RatingDescriptionAlt                 string        `json:"ratingDescriptionAlt"`
-	Synopsis                             string        `json:"synopsis"`
-	SynopsisAlt                          string        `json:"synopsisAlt"`
-	OpeningDate                          MegaplexTime  `json:"openingDate"`
-	FilmHOPK                             string        `json:"filmHOPK"`
-	FilmHOCode                           string        `json:"filmHOCode"`
-	ShortCode                            string        `json:"shortCode"`
-	RunTime                              string        `json:"runTime"`
-	TrailerURL                           string        `json:"trailerUrl"`
-	Cast                                 interface{}   `json:"cast"`
-	DisplaySequence                      int64         `json:"displaySequence"`
-	TwitterTag                           string        `json:"twitterTag"`
-	HasSessionsAvailable                 bool          `json:"hasSessionsAvailable"`
-	GraphicURL                           string        `json:"graphicUrl"`
-	CinemaName                           CinemaName    `json:"cinemaName"`
-	CinemaNameAlt                        string        `json:"cinemaNameAlt"`
-	AllowTicketSales                     bool          `json:"allowTicketSales"`
-	AdvertiseAdvanceBookingDate          bool          `json:"advertiseAdvanceBookingDate"`
-	AdvanceBookingDate                   MegaplexTime  `json:"advanceBookingDate"`
-	LoyaltyAdvanceBookingDate            interface{}   `json:"loyaltyAdvanceBookingDate"`
-	HasDynamicallyPricedTicketsAvailable bool          `json:"hasDynamicallyPricedTicketsAvailable"`
-	IsPlayThroughMarketingFilm           bool          `json:"isPlayThroughMarketingFilm"`
-	PlayThroughFilms                     interface{}   `json:"playThroughFilms"`
-	NationalOpeningDate                  MegaplexTime  `json:"nationalOpeningDate"`
-	CorporateFilmID                      string        `json:"corporateFilmId"`
-	EDICode                              interface{}   `json:"ediCode"`
-	Genres                               []interface{} `json:"genres"`
-	GenreID                              *string       `json:"genreId"`
-	GenreId2                             *string       `json:"genreId2"`
-	GenreId3                             *string       `json:"genreId3"`
-	GenreIDs                             []*string     `json:"genreIDs"`
-	AdditionalUrls                       interface{}   `json:"additionalUrls"`
+type MegaplexScheduledMovie struct {
+	ID                                   string             `json:"id"`
+	ScheduledFilmID                      string             `json:"scheduledFilmId"`
+	CinemaID                             string             `json:"cinemaId"`
+	Sessions                             []MegaplexSession  `json:"sessions"`
+	SessionCount                         int64              `json:"sessionCount"`
+	FirstDaysSessions                    interface{}        `json:"firstDaysSessions"`
+	FutureSessions                       interface{}        `json:"futureSessions"`
+	HasFutureSessions                    bool               `json:"hasFutureSessions"`
+	Title                                string             `json:"title"`
+	TitleAlt                             string             `json:"titleAlt"`
+	Distributor                          string             `json:"distributor"`
+	Rating                               string             `json:"rating"`
+	RatingAlt                            string             `json:"ratingAlt"`
+	RatingDescription                    string             `json:"ratingDescription"`
+	RatingDescriptionAlt                 string             `json:"ratingDescriptionAlt"`
+	Synopsis                             string             `json:"synopsis"`
+	SynopsisAlt                          string             `json:"synopsisAlt"`
+	OpeningDate                          MegaplexTime       `json:"openingDate"`
+	FilmHOPK                             string             `json:"filmHOPK"`
+	FilmHOCode                           string             `json:"filmHOCode"`
+	ShortCode                            string             `json:"shortCode"`
+	RunTime                              string             `json:"runTime"`
+	TrailerURL                           string             `json:"trailerUrl"`
+	Cast                                 interface{}        `json:"cast"`
+	DisplaySequence                      int64              `json:"displaySequence"`
+	TwitterTag                           string             `json:"twitterTag"`
+	HasSessionsAvailable                 bool               `json:"hasSessionsAvailable"`
+	GraphicURL                           string             `json:"graphicUrl"`
+	CinemaName                           MegaplexCinemaName `json:"cinemaName"`
+	CinemaNameAlt                        string             `json:"cinemaNameAlt"`
+	AllowTicketSales                     bool               `json:"allowTicketSales"`
+	AdvertiseAdvanceBookingDate          bool               `json:"advertiseAdvanceBookingDate"`
+	AdvanceBookingDate                   MegaplexTime       `json:"advanceBookingDate"`
+	LoyaltyAdvanceBookingDate            interface{}        `json:"loyaltyAdvanceBookingDate"`
+	HasDynamicallyPricedTicketsAvailable bool               `json:"hasDynamicallyPricedTicketsAvailable"`
+	IsPlayThroughMarketingFilm           bool               `json:"isPlayThroughMarketingFilm"`
+	PlayThroughFilms                     interface{}        `json:"playThroughFilms"`
+	NationalOpeningDate                  MegaplexTime       `json:"nationalOpeningDate"`
+	CorporateFilmID                      string             `json:"corporateFilmId"`
+	EDICode                              interface{}        `json:"ediCode"`
+	Genres                               []interface{}      `json:"genres"`
+	GenreID                              *string            `json:"genreId"`
+	GenreId2                             *string            `json:"genreId2"`
+	GenreId3                             *string            `json:"genreId3"`
+	GenreIDs                             []*string          `json:"genreIDs"`
+	AdditionalUrls                       interface{}        `json:"additionalUrls"`
 }
 
-type Session struct {
-	ID                                   string           `json:"id"`
-	CinemaID                             string           `json:"cinemaId"`
-	ScheduledFilmID                      string           `json:"scheduledFilmId"`
-	SessionID                            string           `json:"sessionId"`
-	AreaCategoryCodes                    []string         `json:"areaCategoryCodes"`
-	Showtime                             MegaplexTime     `json:"showtime"`
-	IsAllocatedSeating                   bool             `json:"isAllocatedSeating"`
-	AllowChildAdmits                     bool             `json:"allowChildAdmits"`
-	SeatsAvailable                       int64            `json:"seatsAvailable"`
-	AllowComplimentaryTickets            bool             `json:"allowComplimentaryTickets"`
-	EventID                              string           `json:"eventId"`
-	PriceGroupCode                       string           `json:"priceGroupCode"`
-	ScreenName                           string           `json:"screenName"`
-	ScreenNameAlt                        string           `json:"screenNameAlt"`
-	ScreenNumber                         int64            `json:"screenNumber"`
-	CinemaOperatorCode                   string           `json:"cinemaOperatorCode"`
-	FormatCode                           Format           `json:"formatCode"`
-	FormatHOPK                           Format           `json:"formatHOPK"`
-	SalesChannels                        string           `json:"salesChannels"`
-	SessionAttributesNames               []AttributesName `json:"sessionAttributesNames"`
-	ConceptAttributesNames               []AttributesName `json:"conceptAttributesNames"`
-	AllowTicketSales                     bool             `json:"allowTicketSales"`
-	HasDynamicallyPricedTicketsAvailable bool             `json:"hasDynamicallyPricedTicketsAvailable"`
-	PlayThroughID                        interface{}      `json:"playThroughId"`
-	SessionBusinessDate                  MegaplexTime     `json:"sessionBusinessDate"`
-	SessionDisplayPriority               int64            `json:"sessionDisplayPriority"`
-	GroupSessionsByAttribute             bool             `json:"groupSessionsByAttribute"`
-	SoldoutStatus                        int64            `json:"soldoutStatus"`
-	TypeCode                             TypeCode         `json:"typeCode"`
-	SponsoredAuditoriumImageURL          interface{}      `json:"sponsoredAuditoriumImageUrl"`
+type MegaplexSession struct {
+	ID                                   string                   `json:"id"`
+	CinemaID                             string                   `json:"cinemaId"`
+	ScheduledFilmID                      string                   `json:"scheduledFilmId"`
+	SessionID                            string                   `json:"sessionId"`
+	AreaCategoryCodes                    []string                 `json:"areaCategoryCodes"`
+	Showtime                             MegaplexTime             `json:"showtime"`
+	IsAllocatedSeating                   bool                     `json:"isAllocatedSeating"`
+	AllowChildAdmits                     bool                     `json:"allowChildAdmits"`
+	SeatsAvailable                       int64                    `json:"seatsAvailable"`
+	AllowComplimentaryTickets            bool                     `json:"allowComplimentaryTickets"`
+	EventID                              string                   `json:"eventId"`
+	PriceGroupCode                       string                   `json:"priceGroupCode"`
+	ScreenName                           string                   `json:"screenName"`
+	ScreenNameAlt                        string                   `json:"screenNameAlt"`
+	ScreenNumber                         int64                    `json:"screenNumber"`
+	CinemaOperatorCode                   string                   `json:"cinemaOperatorCode"`
+	FormatCode                           MegaplexFormat           `json:"formatCode"`
+	FormatHOPK                           MegaplexFormat           `json:"formatHOPK"`
+	SalesChannels                        string                   `json:"salesChannels"`
+	SessionAttributesNames               []MegaplexAttributesName `json:"sessionAttributesNames"`
+	ConceptAttributesNames               []MegaplexAttributesName `json:"conceptAttributesNames"`
+	AllowTicketSales                     bool                     `json:"allowTicketSales"`
+	HasDynamicallyPricedTicketsAvailable bool                     `json:"hasDynamicallyPricedTicketsAvailable"`
+	PlayThroughID                        interface{}              `json:"playThroughId"`
+	SessionBusinessDate                  MegaplexTime             `json:"sessionBusinessDate"`
+	SessionDisplayPriority               int64                    `json:"sessionDisplayPriority"`
+	GroupSessionsByAttribute             bool                     `json:"groupSessionsByAttribute"`
+	SoldoutStatus                        int64                    `json:"soldoutStatus"`
+	TypeCode                             MegaplexTypeCode         `json:"typeCode"`
+	SponsoredAuditoriumImageURL          interface{}              `json:"sponsoredAuditoriumImageUrl"`
 }
 
-type CinemaName string
+type MegaplexCinemaName string
 
 const (
-	University CinemaName = "University"
+	University MegaplexCinemaName = "University"
 )
 
-type AttributesName string
+type MegaplexAttributesName string
 
 const (
-	Cc       AttributesName = "CC"
-	Dbox     AttributesName = "DBOX"
-	Dvs      AttributesName = "DVS"
-	Luxury   AttributesName = "Luxury"
-	OpenCapt AttributesName = "Open Capt"
-	Sensory  AttributesName = "Sensory"
-	The2D    AttributesName = "2D"
-	The3D    AttributesName = "3D"
+	Cc       MegaplexAttributesName = "CC"
+	Dbox     MegaplexAttributesName = "DBOX"
+	Dvs      MegaplexAttributesName = "DVS"
+	Luxury   MegaplexAttributesName = "Luxury"
+	OpenCapt MegaplexAttributesName = "Open Capt"
+	Sensory  MegaplexAttributesName = "Sensory"
+	The2D    MegaplexAttributesName = "2D"
+	The3D    MegaplexAttributesName = "3D"
 )
 
-type Format string
+type MegaplexFormat string
 
 const (
-	The0000000001 Format = "0000000001"
-	The0000000017 Format = "0000000017"
-	Vs00000001    Format = "VS00000001"
+	The0000000001 MegaplexFormat = "0000000001"
+	The0000000017 MegaplexFormat = "0000000017"
+	Vs00000001    MegaplexFormat = "VS00000001"
 )
 
 const (
@@ -133,8 +133,8 @@ const (
 	Screen06 string = "Screen 06"
 )
 
-type TypeCode string
+type MegaplexTypeCode string
 
 const (
-	N TypeCode = "N"
+	N MegaplexTypeCode = "N"
 )
