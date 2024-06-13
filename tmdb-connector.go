@@ -5,6 +5,7 @@ import (
 	"fmt"
 	. "loganfilms/types"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 )
@@ -16,7 +17,7 @@ func searchForMovieTmdbId(title string) int {
 		return noId
 	}
 
-	tmdbApiKey := ""
+	tmdbApiKey := os.Getenv("TMDB_API_KEY")
 	req.Header.Set("Authorization", "Bearer "+tmdbApiKey)
 	req.Header.Set("accept", "application/json")
 

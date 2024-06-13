@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	. "loganfilms/types"
 	"net/http"
 	"sync"
 	"time"
 )
-import . "loganfilms/types"
 
 func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	theaters := []Theater{
