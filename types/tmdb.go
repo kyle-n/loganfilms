@@ -1,4 +1,4 @@
-package main
+package types
 
 type TmdbSearchResponse struct {
 	Page         int64    `json:"page"`

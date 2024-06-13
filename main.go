@@ -9,6 +9,7 @@ import (
 	"sync"
 	"time"
 )
+import . "loganfilms/types"
 
 func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	theaters := []Theater{
