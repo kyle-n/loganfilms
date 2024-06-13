@@ -35,6 +35,7 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 					Title:     session.Title,
 					ShowTimes: make([]time.Time, 0),
 					TmdbId:    0,
+					ReleaseDate: time.Time(session.OpeningDate),
 				}
 				screenings = append(screenings, showTime)
 			}
@@ -43,7 +44,6 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 		}(i)
 	}
 	wg.Wait()
-	// searchForMovieTmdbId("I Saw the TV Glow")
 
 	homePageData := HomePageData{
 		Theaters: theaters,

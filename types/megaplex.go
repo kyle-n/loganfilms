@@ -33,7 +33,7 @@ type TheaterSession struct {
 	RatingDescriptionAlt                 string        `json:"ratingDescriptionAlt"`
 	Synopsis                             string        `json:"synopsis"`
 	SynopsisAlt                          string        `json:"synopsisAlt"`
-	OpeningDate                          MegaplexTime     `json:"openingDate"`
+	OpeningDate                          MegaplexTime  `json:"openingDate"`
 	FilmHOPK                             string        `json:"filmHOPK"`
 	FilmHOCode                           string        `json:"filmHOCode"`
 	ShortCode                            string        `json:"shortCode"`
@@ -48,12 +48,12 @@ type TheaterSession struct {
 	CinemaNameAlt                        string        `json:"cinemaNameAlt"`
 	AllowTicketSales                     bool          `json:"allowTicketSales"`
 	AdvertiseAdvanceBookingDate          bool          `json:"advertiseAdvanceBookingDate"`
-	AdvanceBookingDate                   MegaplexTime     `json:"advanceBookingDate"`
+	AdvanceBookingDate                   MegaplexTime  `json:"advanceBookingDate"`
 	LoyaltyAdvanceBookingDate            interface{}   `json:"loyaltyAdvanceBookingDate"`
 	HasDynamicallyPricedTicketsAvailable bool          `json:"hasDynamicallyPricedTicketsAvailable"`
 	IsPlayThroughMarketingFilm           bool          `json:"isPlayThroughMarketingFilm"`
 	PlayThroughFilms                     interface{}   `json:"playThroughFilms"`
-	NationalOpeningDate                  MegaplexTime     `json:"nationalOpeningDate"`
+	NationalOpeningDate                  MegaplexTime  `json:"nationalOpeningDate"`
 	CorporateFilmID                      string        `json:"corporateFilmId"`
 	EDICode                              interface{}   `json:"ediCode"`
 	Genres                               []interface{} `json:"genres"`
@@ -70,7 +70,7 @@ type Session struct {
 	ScheduledFilmID                      string           `json:"scheduledFilmId"`
 	SessionID                            string           `json:"sessionId"`
 	AreaCategoryCodes                    []string         `json:"areaCategoryCodes"`
-	Showtime                             MegaplexTime        `json:"showtime"`
+	Showtime                             MegaplexTime     `json:"showtime"`
 	IsAllocatedSeating                   bool             `json:"isAllocatedSeating"`
 	AllowChildAdmits                     bool             `json:"allowChildAdmits"`
 	SeatsAvailable                       int64            `json:"seatsAvailable"`
@@ -89,7 +89,7 @@ type Session struct {
 	AllowTicketSales                     bool             `json:"allowTicketSales"`
 	HasDynamicallyPricedTicketsAvailable bool             `json:"hasDynamicallyPricedTicketsAvailable"`
 	PlayThroughID                        interface{}      `json:"playThroughId"`
-	SessionBusinessDate                  MegaplexTime        `json:"sessionBusinessDate"`
+	SessionBusinessDate                  MegaplexTime     `json:"sessionBusinessDate"`
 	SessionDisplayPriority               int64            `json:"sessionDisplayPriority"`
 	GroupSessionsByAttribute             bool             `json:"groupSessionsByAttribute"`
 	SoldoutStatus                        int64            `json:"soldoutStatus"`

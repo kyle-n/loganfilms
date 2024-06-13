@@ -5,9 +5,10 @@ import (
 )
 
 type Screening struct {
-	Title     string
-	ShowTimes []time.Time
-	TmdbId    int
+	Title       string
+	ShowTimes   []time.Time
+	TmdbId      int
+	ReleaseDate time.Time
 }
 
 type Theater struct {
