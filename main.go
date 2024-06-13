@@ -11,9 +11,14 @@ import (
 
 func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	universityScreenings := getMegaplexScreenings("0008")
-	homePageData := HomePageData{
+	universityTheaterScreenings := Theater{
 		Screenings: universityScreenings,
-		Today:     time.Now(),
+		Id:         "0008",
+		Name:       "University Cinemas",
+	}
+	homePageData := HomePageData{
+		Theaters: []Theater{universityTheaterScreenings},
+		Today:             time.Now(),
 	}
 	template, _ := template.ParseFiles("home.html")
 	_ = template.Execute(w, homePageData)
@@ -42,7 +47,6 @@ func getMegaplexScreenings(theaterId string) []Screening {
 		}
 		screenings = append(screenings, showTime)
 	}
-	fmt.Println(screenings)
 
 	return screenings
 }

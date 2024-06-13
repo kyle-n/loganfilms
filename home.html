@@ -10,10 +10,15 @@
   <body>
     <h1>Logan Movie Times</h1>
     <p>Today's date: {{ .Today }}</p>
-    <ul>
-      {{ range $screening := .Screenings }}
-      <li>{{ $screening.Title }}</li>
-      {{ end }}
-    </ul>
+    {{ range $theater := .Theaters }}
+      <section>
+        <h2>{{ $theater.Name }}</h2>
+        <ul>
+          {{ range $screening := $theater.Screenings }}
+            <li>{{ $screening.Title }}</li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
   </body>
 </html>

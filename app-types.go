@@ -10,7 +10,13 @@ type Screening struct {
 	TmdbId    int
 }
 
-type HomePageData struct {
+type Theater struct {
 	Screenings []Screening
-	Today     time.Time
+	Id         string
+	Name       string
+}
+
+type HomePageData struct {
+	Theaters []Theater
+	Today             time.Time
 }
