@@ -10,15 +10,26 @@ import (
 )
 
 func homepageHandler(w http.ResponseWriter, r *http.Request) {
-	universityScreenings := getMegaplexScreenings("0008")
-	universityTheaterScreenings := Theater{
-		Screenings: universityScreenings,
-		Id:         "0008",
-		Name:       "University Cinemas",
+	theaters := []Theater{
+		{
+			Screenings: make([]Screening, 0),
+			Id:         "0008",
+			Name:       "Megaplex University",
+		},
+		{
+			Screenings: make([]Screening, 0),
+			Id:         "0010",
+			Name:       "Megaplex Providence",
+		},
 	}
+
+	for i := range theaters {
+		theaters[i].Screenings = getMegaplexScreenings(theaters[i].Id)
+	}
+
 	homePageData := HomePageData{
-		Theaters: []Theater{universityTheaterScreenings},
-		Today:             time.Now(),
+		Theaters: theaters,
+		Today:    time.Now(),
 	}
 	template, _ := template.ParseFiles("home.html")
 	_ = template.Execute(w, homePageData)
