@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"html/template"
 )
 
 type Showtime struct {
@@ -17,7 +18,8 @@ type Showtime struct {
 func homepageHandler(w http.ResponseWriter, r *http.Request) {
 	// getMegaplexShowtimes("https://www.megaplextheatres.com/university")
 	getMegaplexShowtimes("0008")
-	w.Write([]byte("Hello, World!"))
+	template, _ := template.ParseFiles("home.html")
+	_ = template.Execute(w, nil)
 }
 
 func getMegaplexShowtimes(theaterId string) []Showtime {
@@ -27,18 +29,25 @@ func getMegaplexShowtimes(theaterId string) []Showtime {
 		log.Fatal(httpErr, "Failed to get showtimes from Megaplex")
 	}
 	defer res.Body.Close()
-	var showTimes TheaterSessions
-	decodeErr := json.NewDecoder(res.Body).Decode(&showTimes)
+	var megaplexTheaterSessions TheaterSessions
+	decodeErr := json.NewDecoder(res.Body).Decode(&megaplexTheaterSessions)
 	fmt.Println(res.Status, "Status")
 	if decodeErr != nil {
 		log.Fatal(decodeErr, "Failed to decode showtimes from Megaplex")
 	}
 
-	for _, showTime := range showTimes {
-		fmt.Println(showTime.Title)
+	showTimes := make([]Showtime, 0)
+	for _, session := range megaplexTheaterSessions {
+		showTime := Showtime{
+			Title:     session.Title,
+			ShowTimes: make([]time.Time, 0),
+			TMDBID:    0,
+		}
+		showTimes = append(showTimes, showTime)
 	}
+	fmt.Println(showTimes)
 
-	return make([]Showtime, 0)
+	return showTimes
 }
 
 func main() {
