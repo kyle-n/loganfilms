@@ -13,11 +13,14 @@
     {{ range $theater := .Theaters }}
       <section>
         <h2>{{ $theater.Name }}</h2>
-        <ul>
-          {{ range $screening := $theater.Screenings }}
-            <li>{{ $screening.Title }} - opens {{ $screening.ReleaseDate }}</li>
-          {{ end }}
-        </ul>
+        {{ range $movie := $theater.Screenings }}
+          <h3>{{ $movie.Title }}</h3>
+          <ul>
+            {{ range $showtime := $movie.ShowTimes }}
+              <li>{{ $showtime }}</li>
+            {{ end }}
+          </ul>
+        {{ end }}
       </section>
     {{ end }}
   </body>

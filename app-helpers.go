@@ -3,6 +3,7 @@ package main
 import (
 	. "loganfilms/types"
 	"slices"
+	"time"
 )
 
 func sortScreeningsByReleaseDate(screenings *[]Screening) {
@@ -12,5 +13,13 @@ func sortScreeningsByReleaseDate(screenings *[]Screening) {
 		} else {
 			return 1
 		}
-	});
+	})
+}
+
+func getShowTimesFromMegaplexSession(movie TheaterSession) []time.Time {
+	showTimes := make([]time.Time, 0)
+	for _, session := range movie.Sessions {
+		showTimes = append(showTimes, time.Time(session.Showtime))
+	}
+	return showTimes
 }

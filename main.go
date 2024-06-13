@@ -33,7 +33,7 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 			for _, session := range sessions {
 				showTime := Screening{
 					Title:     session.Title,
-					ShowTimes: make([]time.Time, 0),
+					ShowTimes: getShowTimesFromMegaplexSession(session),
 					TmdbId:    0,
 					ReleaseDate: time.Time(session.NationalOpeningDate),
 				}
