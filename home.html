@@ -15,7 +15,7 @@
         <h2>{{ $theater.Name }}</h2>
         <ul>
           {{ range $screening := $theater.Screenings }}
-            <li>{{ $screening.Title }}</li>
+            <li>{{ $screening.Title }} - opens {{ $screening.ReleaseDate }}</li>
           {{ end }}
         </ul>
       </section>

@@ -35,11 +35,12 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 					Title:     session.Title,
 					ShowTimes: make([]time.Time, 0),
 					TmdbId:    0,
-					ReleaseDate: time.Time(session.OpeningDate),
+					ReleaseDate: time.Time(session.NationalOpeningDate),
 				}
 				screenings = append(screenings, showTime)
 			}
 			theaters[i].Screenings = screenings
+			sortScreeningsByReleaseDate(&theaters[i].Screenings)
 			wg.Done()
 		}(i)
 	}
