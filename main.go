@@ -42,7 +42,7 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 				screenings = append(screenings, showTime)
 			}
 			theaters[i].Screenings = screenings
-			sortScreeningsByReleaseDate(&theaters[i].Screenings)
+			sortScreeningsByNextShowTime(&theaters[i].Screenings)
 			wg.Done()
 		}(i)
 	}

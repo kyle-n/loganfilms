@@ -6,9 +6,15 @@ import (
 	"time"
 )
 
-func sortScreeningsByReleaseDate(screenings *[]Screening) {
+func sortScreeningsByNextShowTime(screenings *[]Screening) {
 	slices.SortStableFunc(*screenings, func(a, b Screening) int {
-		if a.ReleaseDate.Before(b.ReleaseDate) {
+		if a.ShowTimes == nil || len(a.ShowTimes) == 0 {
+			return 1
+		}
+		if b.ShowTimes == nil || len(b.ShowTimes) == 0 {
+			return -1
+		}
+		if a.ShowTimes[0].Before(b.ShowTimes[0]) {
 			return -1
 		} else {
 			return 1
