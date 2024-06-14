@@ -43,6 +43,7 @@ func homepageHandler(w http.ResponseWriter, r *http.Request) {
 			}
 			theaters[i].Screenings = screenings
 			sortScreeningsByNextShowTime(&theaters[i].Screenings)
+			limitScreeningsToMaxOrTimeLimit(&theaters[i].Screenings)
 			wg.Done()
 		}(i)
 	}

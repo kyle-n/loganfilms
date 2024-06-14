@@ -29,3 +29,21 @@ func getShowTimesFromMegaplexSession(movie MegaplexScheduledMovie) []time.Time {
 	}
 	return showTimes
 }
+
+func limitScreeningsToMaxOrTimeLimit(screenings *[]Screening) {
+	maxShowTimes := 10
+	maxTimeInFuture := time.Now().AddDate(0, 0, 2)
+
+	for i := 0; i < len(*screenings); i++ {
+		if len((*screenings)[i].ShowTimes) < maxShowTimes {
+			continue
+		}
+
+		for s := 0; s < len((*screenings)[i].ShowTimes); s++ {
+			if (*screenings)[i].ShowTimes[s].After(maxTimeInFuture) {
+				(*screenings)[i].ShowTimes = (*screenings)[i].ShowTimes[:s]
+				break
+			}
+		}
+	}
+}
