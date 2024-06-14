@@ -13,28 +13,48 @@
       Today's date and time: {{ .Today.Format "Monday, January 2, 2006 - 3:04pm"
       }}
     </p>
+    <p>
+      <a href="#utah-theater-heading">Jump to The Utah Theater</a>
+    </p>
     <main>
-      {{ range $theater := .Theaters }}
-      <section>
-        <h2>
-          <a href="{{ $theater.Url }}" target="_blank"> {{ $theater.Name }} </a>
-        </h2>
-        {{ range $movie := $theater.Screenings }}
-        <h3>{{ $movie.Title }}</h3>
-        <ul>
-          {{ range $showtime := $movie.ShowTimes }}
-          <li data-og-date="{{ $showtime }}">
-            {{ $showtime.Format "Monday, January 2, 3:04pm" }}
-          </li>
+      <section id="megaplex-theaters">
+        {{ range $theater := .Theaters }}
+        <div class="megaplex-theater">
+          <h2>
+            <a href="{{ $theater.Url }}" target="_blank">
+              {{ $theater.Name }}
+            </a>
+          </h2>
+          {{ range $movie := $theater.Screenings }}
+          <h3>{{ $movie.Title }}</h3>
+          <ul>
+            {{ range $showtime := $movie.ShowTimes }}
+            <li data-og-date="{{ $showtime }}">
+              {{ $showtime.Format "Monday, January 2, 3:04pm" }}
+            </li>
+            {{ end }}
+          </ul>
           {{ end }}
-        </ul>
+        </div>
         {{ end }}
       </section>
-      {{ end }}
+      <section>
+        <h2 id="utah-theater-heading">
+          <a
+            href="https://boxoffice.adventuretix.com/utahtheatre/events"
+            target="_blank"
+          >
+            The Utah Theater
+          </a>
+        </h2>
+        <img
+          src="https://www.theutahtheatre.org/utah-festival-static-home-page.jpg"
+        />
+      </section>
     </main>
   </body>
   <style>
-    main {
+    #megaplex-theaters {
       display: flex;
       justify-content: space-between;
     }
